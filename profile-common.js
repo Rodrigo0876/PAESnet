@@ -1,10 +1,12 @@
 const PAESNET_PROFILE_KEY = "paesnetStudentProfile";
 
 const PAESNET_DEFAULT_PROFILE = {
-  name: "Estudiante PAES",
+  name: "",
+  email: "cristobalcontreras@paesnet.cl",
   course: "4° Medio",
   school: "",
   career: "",
+  university: "",
   admissionYear: "2027",
   generalGoal: 750,
   goals: {
@@ -48,6 +50,12 @@ function applyPaesnetProfile(profile = getPaesnetProfile()) {
   });
   document.querySelectorAll("[data-profile-career]").forEach(el => {
     el.textContent = profile.career || "Meta académica por definir";
+  });
+  document.querySelectorAll("[data-profile-university]").forEach(el => {
+    el.textContent = profile.university || "Universidad por definir";
+  });
+  document.querySelectorAll("[data-profile-email]").forEach(el => {
+    el.textContent = profile.email || PAESNET_DEFAULT_PROFILE.email;
   });
   document.querySelectorAll("[data-profile-general-goal]").forEach(el => {
     el.textContent = profile.generalGoal || PAESNET_DEFAULT_PROFILE.generalGoal;

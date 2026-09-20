@@ -49,3 +49,7 @@ PAESnet mantiene las preguntas internas como simulaciones de práctica y enlaza 
 ## Banco de preguntas ampliado
 
 Las preguntas de PAESnet son simulaciones originales. La cantidad de preguntas por prueba toma como referencia la PAES de Invierno 2026 (Admisión 2027) publicada por DEMRE, sin reproducir ítems oficiales.
+
+## Inicio de sesión
+
+La portada del prototipo ahora corresponde al inicio de sesión. La sesión se mantiene localmente en el navegador y las páginas internas redirigen al login si no existe una sesión activa. La opción "¿Olvidaste tu contraseña?" completa las credenciales de demostración para facilitar la evaluación del prototipo. Este mecanismo es solo demostrativo y no sustituye autenticación segura con backend.

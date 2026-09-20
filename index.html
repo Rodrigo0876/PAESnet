@@ -3,162 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Plantilla inicial para una aplicación de preparación PAES." />
-  <title>PAESnet</title>
-
+  <meta name="description" content="Inicio de sesión de PAESnet." />
+  <title>Iniciar sesión | PAESnet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="app-shell">
-    <header class="topbar">
-      <button class="icon-button" id="menuButton" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-
-      <a href="#" class="brand" aria-label="PAESnet Inicio">
-        <div class="brand-icon">🎓</div>
-        <span>PAES<span class="brand-light">net</span></span>
-      </a>
-
-      <button class="notification-button" aria-label="Notificaciones">
-        🔔
-        <span class="notification-badge">8</span>
-      </button>
-    </header>
-
-    <aside class="side-menu" id="sideMenu" aria-hidden="true">
-      <div class="side-menu-header">
-        <strong>PAESnet</strong>
-        <button class="close-menu" id="closeMenu" aria-label="Cerrar menú">×</button>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="login-brand-panel">
+      <div class="login-brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></div>
+      <div class="login-brand-copy">
+        <span class="login-kicker">Tu preparación en un solo lugar</span>
+        <h1>Prepárate para alcanzar tu meta PAES.</h1>
+        <p>Organiza tus ensayos, revisa tus resultados y sigue tu progreso durante tu preparación.</p>
       </div>
+      <div class="login-feature-row"><span>📝 Ensayos</span><span>📊 Resultados</span><span>📅 Organización</span></div>
+    </section>
 
-      <nav class="side-menu-nav">
-        <a href="#inicio">Inicio</a>
-        <a href="calendario.html">Eventos</a>
-        <a href="estudio.html">Plan de estudio</a>
-        <a href="resultados.html">Resultados</a>
-        <a href="#servicios">Servicios</a>
-        <a href="perfil.html">Perfil</a>
-      </nav>
-    </aside>
-
-    <div class="menu-overlay" id="menuOverlay"></div>
-
-    <main id="inicio">
-      <section class="section" id="eventos">
-        <div class="section-heading">
-          <h1>Próximos eventos PAES</h1>
-          <button class="text-button">Ver todos <span>›</span></button>
-        </div>
-
-        <div class="horizontal-scroll event-grid" id="eventContainer">
-          <!-- Las tarjetas se generan desde app.js -->
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="filter-row">
-          <button class="filter-button active" data-filter="hoy">Hoy</button>
-          <button class="filter-button" data-filter="semana">Esta semana</button>
-          <button class="filter-button" data-filter="pendientes">Pendientes</button>
-          <button class="calendar-button">📅 Ver calendario</button>
-        </div>
-
-        <div class="horizontal-scroll study-grid" id="studyContainer">
-          <!-- Las tarjetas se generan desde app.js -->
-        </div>
-      </section>
-
-      <section class="section" id="progreso">
-        <div class="section-title-block">
-          <h2>Tu preparación PAES</h2>
-          <p>Resumen de tu progreso y metas</p>
-        </div>
-
-        <div class="student-profile">
-          <div class="avatar">👤</div>
-          <div>
-            <strong data-profile-name>Estudiante PAES</strong>
-            <span data-profile-course>4° Medio</span>
-          </div>
-        </div>
-
-        <div class="stats-grid">
-          <article class="stat-card">
-            <div class="stat-header">
-              <span class="stat-icon">🎯</span>
-              <strong>Próximo ensayo</strong>
-            </div>
-            <p>Ensayo PAES completo</p>
-            <p>Sábado 24 de mayo</p>
-            <div class="stat-number">12 <small>días</small></div>
-            <span class="stat-footer">para tu próximo ensayo</span>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-header">
-              <span class="stat-icon">📊</span>
-              <strong>Promedio general</strong>
-            </div>
-            <p>Ensayos realizados</p>
-            <div class="stat-number" id="homeAverageResult">-- <small>promedio</small></div>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-header">
-              <span class="stat-icon">📈</span>
-              <strong>Progreso general</strong>
-            </div>
-            <p>Ensayos completados</p>
-            <div class="stat-number" id="homeCompletedProgress">0%</div>
-            <div class="progress-track">
-              <div class="progress-fill" id="homeCompletedProgressBar" style="width: 0%"></div>
-            </div>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-header">
-              <span class="stat-icon">🚩</span>
-              <strong>Meta PAES</strong>
-            </div>
-            <p>Puntaje objetivo</p>
-            <div class="stat-number"><span data-profile-m1-goal>800</span> <small>puntos M1</small></div>
-            <span class="stat-footer">Meta general: <span data-profile-general-goal>750</span>+</span>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="servicios">
-        <div class="section-title-block">
-          <h2>Servicios de estudio</h2>
-          <p>Recursos y herramientas para tu preparación</p>
-        </div>
-
-        <div class="services-grid" id="servicesContainer">
-          <!-- Las tarjetas se generan desde app.js -->
-        </div>
-      </section>
-    </main>
-
-    <nav class="bottom-nav" aria-label="Navegación principal">
-      <a class="bottom-nav-item active" href="#inicio"><span>⌂</span><small>Inicio</small></a>
-      <a class="bottom-nav-item" href="asistencia.html"><span>📝</span><small>Ensayos</small></a>
-      <a class="bottom-nav-item" href="estudio.html"><span>📖</span><small>Estudio</small></a>
-      <a class="bottom-nav-item" href="calendario.html"><span>📅</span><small>Calendario</small></a>
-      <a class="bottom-nav-item" href="resultados.html"><span>📊</span><small>Resultados</small></a>
-      <a class="bottom-nav-item" href="perfil.html"><span>👤</span><small>Perfil</small></a>
-      <a class="bottom-nav-item" href="#"><span>•••</span><small>Más</small></a>
-    </nav>
-  </div>
-
-  <script src="profile-common.js"></script>
-  <script src="app.js"></script>
+    <section class="login-form-panel">
+      <div class="login-card">
+        <div class="login-mobile-brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></div>
+        <span class="login-kicker">Bienvenido</span>
+        <h2>Iniciar sesión</h2>
+        <p class="login-subtitle">Ingresa tus datos para acceder a PAESnet.</p>
+        <form id="loginForm" class="login-form">
+          <label><span>Correo electrónico</span><input id="loginEmail" type="email" autocomplete="username" placeholder="correo@ejemplo.cl" required></label>
+          <label><span>Contraseña</span><div class="password-field"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required><button type="button" id="togglePassword">Ver</button></div></label>
+          <div class="login-help"><button type="button" id="forgotPassword">¿Olvidaste tu contraseña?</button></div>
+          <button class="login-submit" type="submit">Iniciar sesión</button>
+          <div id="loginMessage" class="login-message" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="login.js"></script>
 </body>
 </html>

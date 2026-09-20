@@ -5,27 +5,26 @@
   <title>PAESnet - Estudio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css" />
+  <script src="auth.js"></script>
 </head>
 <body><div class="app-shell">
-<header class="topbar"><a href="index.html" class="brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></a><div class="student-select">👤 <span data-profile-name>Estudiante PAES</span></div></header>
+<header class="topbar"><a href="inicio.html" class="brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></a><div class="student-select">👤 <span data-profile-name>Estudiante PAES</span></div></header>
 <main class="workspace-page">
-<section class="workspace-hero"><div><a class="back-link" href="index.html">←</a><span class="workspace-kicker">Preparación</span><h1>Plan de estudio</h1><p>Plantilla inicial para organizar materias, objetivos semanales y sesiones de práctica.</p></div><button class="exam-button primary" disabled>+ Crear sesión · Próximamente</button></section>
+<section class="workspace-hero"><div><a class="back-link" href="inicio.html">←</a><span class="workspace-kicker">Preparación</span><h1>Plan de estudio</h1><p>Organiza tus sesiones de práctica y revisa lo que tienes planificado en el calendario.</p></div><a class="exam-button primary" href="calendario.html">+ Programar sesión</a></section>
 <section class="study-overview-grid">
 <article class="study-overview-card"><span>🎯</span><div><small>Meta semanal</small><strong>5 sesiones</strong><p>Configurable en una próxima versión.</p></div></article>
 <article class="study-overview-card"><span>⏱️</span><div><small>Tiempo planificado</small><strong>6 h 30 min</strong><p>Ejemplo de planificación.</p></div></article>
 <article class="study-overview-card"><span>🔥</span><div><small>Racha</small><strong>0 días</strong><p>Se activará con el seguimiento.</p></div></article>
 </section>
 <section class="study-template-layout">
-<article class="study-plan-card"><div class="section-title-block"><h2>Esta semana</h2><p>Ejemplo visual de futuras sesiones</p></div>
-<div class="study-session"><div class="study-session-date"><strong>Lun</strong><span>31</span></div><div><strong>Matemática M1 · Álgebra</strong><p>Modelamiento y funciones lineales · 60 min</p></div><span class="template-badge">Planificado</span></div>
-<div class="study-session"><div class="study-session-date"><strong>Mié</strong><span>02</span></div><div><strong>Competencia Lectora</strong><p>Interpretar y evaluar textos · 45 min</p></div><span class="template-badge">Planificado</span></div>
-<div class="study-session"><div class="study-session-date"><strong>Vie</strong><span>04</span></div><div><strong>Ciencias</strong><p>Análisis de datos experimentales · 60 min</p></div><span class="template-badge">Planificado</span></div>
+<article class="study-plan-card"><div class="section-title-block"><h2>Esta semana</h2><p>Sesiones sincronizadas con Calendario</p></div>
+<div id="studySessions"></div>
 </article>
 <aside class="study-focus-card"><span class="workspace-kicker">Zona de enfoque</span><h2>Qué estudiar después</h2><div class="empty-template"><div>📖</div><strong>Recomendaciones pendientes</strong><p>En una próxima etapa podremos usar tus resultados para priorizar automáticamente las áreas con más errores.</p></div><div class="template-note"><strong>Funciones previstas</strong><p>Sesiones · checklist · tiempo de estudio · recomendaciones · práctica de errores.</p></div></aside>
 </section>
-</main><nav class="bottom-nav"><a class="bottom-nav-item " href="index.html"><span>⌂</span><small>Inicio</small></a>
+</main><nav class="bottom-nav"><a class="bottom-nav-item " href="inicio.html"><span>⌂</span><small>Inicio</small></a>
 <a class="bottom-nav-item " href="asistencia.html"><span>📝</span><small>Ensayos</small></a>
 <a class="bottom-nav-item active" href="estudio.html"><span>📖</span><small>Estudio</small></a>
 <a class="bottom-nav-item " href="calendario.html"><span>📅</span><small>Calendario</small></a>
 <a class="bottom-nav-item " href="resultados.html"><span>📊</span><small>Resultados</small></a>
-<a class="bottom-nav-item " href="perfil.html"><span>👤</span><small>Perfil</small></a></nav></div><script src="profile-common.js"></script></body></html>
+<a class="bottom-nav-item " href="perfil.html"><span>👤</span><small>Perfil</small></a></nav></div><script src="profile-common.js"></script><script src="study-common.js"></script><script src="estudio.js"></script></body></html>
