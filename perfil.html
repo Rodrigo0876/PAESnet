@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAESnet - Perfil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button" id="menuButton" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <a href="index.html" class="brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></a>
+      <button class="notification-button" aria-label="Notificaciones">🔔<span class="notification-badge">8</span></button>
+    </header>
+
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+      <div class="side-menu-header"><strong>PAESnet</strong><button class="close-menu" id="closeMenu">×</button></div>
+      <nav class="side-menu-nav">
+        <a href="index.html">Inicio</a>
+        <a href="asistencia.html">Ensayos / Asistencia</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </aside>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <main class="profile-page">
+      <section class="profile-hero">
+        <div>
+          <a class="back-link" href="index.html">←</a>
+          <p class="exam-label">Mi cuenta</p>
+          <h1>Perfil del estudiante</h1>
+          <p>Personaliza tus datos académicos y tus metas de preparación PAES.</p>
+        </div>
+        <div class="profile-avatar-large">👤</div>
+      </section>
+
+      <section class="profile-overview-card">
+        <div class="profile-avatar-large small">👤</div>
+        <div class="profile-overview-copy">
+          <h2 data-profile-name>Estudiante PAES</h2>
+          <p><span data-profile-course>4° Medio</span> · <span data-profile-school>Establecimiento no indicado</span></p>
+          <span class="profile-goal-chip">🎯 Meta general: <strong><span data-profile-general-goal>750</span>+ pts</strong></span>
+        </div>
+      </section>
+
+      <section class="profile-layout">
+        <article class="profile-form-card">
+          <div class="profile-section-head">
+            <div><h2>Información académica</h2><p>Estos datos se guardan únicamente en este navegador.</p></div>
+          </div>
+
+          <form id="profileForm" class="profile-form">
+            <div class="profile-field-grid">
+              <label class="profile-field">
+                <span>Nombre</span>
+                <input id="profileName" type="text" maxlength="60" placeholder="Ej: Sofía González" />
+              </label>
+              <label class="profile-field">
+                <span>Curso</span>
+                <input id="profileCourse" type="text" maxlength="40" placeholder="Ej: 4° Medio A" />
+              </label>
+              <label class="profile-field full">
+                <span>Establecimiento</span>
+                <input id="profileSchool" type="text" maxlength="80" placeholder="Ej: Colegio / Liceo" />
+              </label>
+              <label class="profile-field full">
+                <span>Carrera o meta académica</span>
+                <input id="profileCareer" type="text" maxlength="80" placeholder="Ej: Ingeniería Informática" />
+              </label>
+              <label class="profile-field">
+                <span>Proceso de admisión</span>
+                <select id="profileAdmissionYear">
+                  <option value="2027">Admisión 2027</option>
+                  <option value="2028">Admisión 2028</option>
+                  <option value="2029">Admisión 2029</option>
+                </select>
+              </label>
+              <label class="profile-field">
+                <span>Meta general PAES</span>
+                <input id="profileGeneralGoal" type="number" min="100" max="1000" step="10" />
+              </label>
+            </div>
+
+            <div class="profile-goals-title">
+              <h3>Metas por prueba</h3>
+              <p>Define un puntaje objetivo distinto para cada área.</p>
+            </div>
+
+            <div class="goal-input-grid">
+              <label><span>📘 Competencia Lectora</span><input id="goalLectora" type="number" min="100" max="1000" step="10" /></label>
+              <label><span>🧮 Matemática M1</span><input id="goalM1" type="number" min="100" max="1000" step="10" /></label>
+              <label><span>📐 Matemática M2</span><input id="goalM2" type="number" min="100" max="1000" step="10" /></label>
+              <label><span>🧪 Ciencias</span><input id="goalCiencias" type="number" min="100" max="1000" step="10" /></label>
+              <label><span>🏛️ Historia y Cs. Sociales</span><input id="goalHistoria" type="number" min="100" max="1000" step="10" /></label>
+            </div>
+
+            <div class="profile-actions">
+              <button type="button" class="exam-button secondary" id="resetProfile">Restablecer</button>
+              <button type="submit" class="exam-button primary">Guardar perfil</button>
+            </div>
+            <div id="profileSavedMessage" class="profile-saved-message" aria-live="polite"></div>
+          </form>
+        </article>
+
+        <aside class="profile-side-column">
+          <article class="profile-mini-card">
+            <span class="profile-mini-icon">🎯</span>
+            <div><small>Meta principal</small><strong><span data-profile-general-goal>750</span>+ puntos</strong></div>
+          </article>
+          <article class="profile-mini-card">
+            <span class="profile-mini-icon">🧮</span>
+            <div><small>Meta M1</small><strong><span data-profile-m1-goal>800</span> puntos</strong></div>
+          </article>
+          <article class="profile-mini-card">
+            <span class="profile-mini-icon">🎓</span>
+            <div><small>Objetivo académico</small><strong data-profile-career>Meta académica por definir</strong></div>
+          </article>
+
+          <article class="official-material-card">
+            <span>✅ Material oficial</span>
+            <h3>Preguntas PAES publicadas por DEMRE</h3>
+            <p>PAESnet mantiene sus ensayos de práctica y además te permite consultar las pruebas oficiales liberadas por DEMRE.</p>
+            <a href="https://portaldemre.demre.cl/publicaciones/2025/pruebas-oficiales-y-seleccion-preguntas-paes-p2025" target="_blank" rel="noopener noreferrer" class="exam-button primary official-link">Ver material oficial ↗</a>
+          </article>
+        </aside>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="bottom-nav-item" href="index.html"><span>⌂</span><small>Inicio</small></a>
+      <a class="bottom-nav-item" href="asistencia.html"><span>📝</span><small>Ensayos</small></a>
+      <a class="bottom-nav-item" href="estudio.html"><span>📖</span><small>Estudio</small></a>
+      <a class="bottom-nav-item" href="calendario.html"><span>📅</span><small>Calendario</small></a>
+      <a class="bottom-nav-item" href="resultados.html"><span>📊</span><small>Resultados</small></a>
+      <a class="bottom-nav-item active" href="perfil.html"><span>👤</span><small>Perfil</small></a>
+      <a class="bottom-nav-item" href="#"><span>•••</span><small>Más</small></a>
+    </nav>
+  </div>
+  <script src="profile-common.js"></script>
+  <script src="app.js"></script>
+  <script src="perfil.js"></script>
+</body>
+</html>

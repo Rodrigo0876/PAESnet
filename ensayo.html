@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAESnet - Ensayo</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <a href="asistencia.html" class="back-button">←</a>
+
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <span>PAES<span class="brand-light">net</span></span>
+      </div>
+
+      <div class="exam-status">
+        <span id="questionCounter">Pregunta 1 de 5</span>
+      </div>
+    </header>
+
+    <main class="exam-page">
+
+      <section class="exam-header">
+        <div>
+          <p class="exam-label">Ensayo PAES</p>
+          <h1 id="examTitle">Ensayo 1</h1>
+          <p id="examSubject">Competencia Lectora</p>
+        </div>
+
+        <div class="exam-progress-info">
+          <strong id="progressText">0%</strong>
+          <span>Completado</span>
+        </div>
+      </section>
+
+      <div class="exam-progress-bar">
+        <div id="examProgressFill"></div>
+      </div>
+
+      <section class="question-card">
+
+        <div class="question-header">
+          <span id="questionNumber" class="question-number">
+            Pregunta 1
+          </span>
+
+          <span id="questionAxis" class="question-axis">
+            Comprensión
+          </span>
+        </div>
+
+        <h2 id="questionText">
+          Cargando pregunta...
+        </h2>
+
+        <div id="answersContainer" class="answers-container">
+        </div>
+
+      </section>
+
+      <section class="exam-navigation">
+
+        <button
+          id="previousButton"
+          class="exam-button secondary"
+          disabled
+        >
+          ← Anterior
+        </button>
+
+        <button
+          id="nextButton"
+          class="exam-button primary"
+        >
+          Siguiente →
+        </button>
+
+      </section>
+
+      <section class="question-map-section">
+
+        <h3>Preguntas</h3>
+
+        <div
+          id="questionMap"
+          class="question-map"
+        >
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="ensayo.js"></script>
+</body>
+</html>

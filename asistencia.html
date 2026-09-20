@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAESnet - Asistencia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button" id="menuButton" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <a href="index.html" class="brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></a>
+      <button class="notification-button" aria-label="Notificaciones">🔔<span class="notification-badge">8</span></button>
+    </header>
+
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+      <div class="side-menu-header"><strong>PAESnet</strong><button class="close-menu" id="closeMenu">×</button></div>
+      <nav class="side-menu-nav">
+        <a href="index.html">Inicio</a>
+        <a href="asistencia.html">Asistencia PAES</a>
+        <a href="index.html#servicios">Servicios</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </aside>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <main class="attendance-page">
+      <div class="attendance-header">
+        <div class="attendance-title">
+          <a class="back-link" href="index.html">←</a>
+          <div>
+            <h1 style="margin:0">Asistencia PAES</h1>
+            <p style="margin:5px 0 0;color:#667085">Ensayos asistidos, puntajes y revisión de preguntas</p>
+          </div>
+        </div>
+        <div class="student-select">👤 <span data-profile-name>Estudiante PAES</span> ▾</div>
+      </div>
+
+      <section class="exam-type-switch" aria-label="Tipo de ensayo">
+        <button class="exam-type-tab active" data-exam-type="regular">
+          <span>📘</span>
+          <div><strong>PAES Regular</strong><small>Ensayos del proceso regular</small></div>
+        </button>
+        <button class="exam-type-tab" data-exam-type="invierno">
+          <span>❄️</span>
+          <div><strong>PAES de Invierno</strong><small>Ensayos de preparación de invierno</small></div>
+        </button>
+      </section>
+
+      <div class="practice-source-note">
+        <span>ℹ️</span>
+        <p><strong>Ensayos de práctica PAESnet.</strong> Las preguntas son simulaciones originales de PAESnet, diseñadas siguiendo habilidades y temarios PAES; no son ítems oficiales. Para material liberado oficialmente, consulta el <a href="https://portaldemre.demre.cl/publicaciones/2025/pruebas-oficiales-y-seleccion-preguntas-paes-p2025" target="_blank" rel="noopener noreferrer">material oficial DEMRE ↗</a>.</p>
+      </div>
+
+      <section class="attendance-summary">
+        <article class="profile-card">
+          <div class="avatar">👤</div>
+          <div>
+            <h2 data-profile-name>Estudiante PAES</h2>
+            <p data-profile-course>4° Medio</p>
+            <div class="profile-stats">
+              <span>📅 <strong id="scheduledCount">7</strong> ensayos programados</span>
+              <span>✅ <strong id="attendedCount">6</strong> ensayos asistidos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="attendance-card">
+          <h3>% Asistencia PAES</h3>
+          <div class="donut-wrap">
+            <div class="donut" id="attendanceDonut" style="--value:86">
+              <div class="donut-content"><strong id="attendancePercent">86%</strong><span id="attendanceFraction">6 de 7 ensayos</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="competency-card">
+          <h3>% Asistencia por competencia</h3>
+          <div id="competencyContainer"></div>
+        </article>
+      </section>
+
+      <section class="attendance-content">
+        <article class="exam-list-card">
+          <div class="exam-list-title"><h2 id="examListHeading">Ensayos PAES Regular</h2></div>
+          <div id="examList"></div>
+        </article>
+
+        <div class="exam-workspace">
+          <article class="exam-detail-card" id="examDetail">
+            <p style="color:#667085;margin:0">Selecciona un ensayo para ver su detalle.</p>
+          </article>
+          <article class="question-detail-card hidden" id="questionDetail"></article>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="bottom-nav-item" href="index.html"><span>⌂</span><small>Inicio</small></a>
+      <a class="bottom-nav-item active" href="asistencia.html"><span>📝</span><small>Ensayos</small></a>
+      <a class="bottom-nav-item" href="estudio.html"><span>📖</span><small>Estudio</small></a>
+      <a class="bottom-nav-item" href="calendario.html"><span>📅</span><small>Calendario</small></a>
+      <a class="bottom-nav-item" href="resultados.html"><span>📊</span><small>Resultados</small></a>
+      <a class="bottom-nav-item" href="perfil.html"><span>👤</span><small>Perfil</small></a>
+      <a class="bottom-nav-item" href="#"><span>•••</span><small>Más</small></a>
+    </nav>
+  </div>
+  <script src="profile-common.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

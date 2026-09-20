@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAESnet - Resultados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="icon-button" id="menuButton" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      <a href="index.html" class="brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></a>
+      <button class="notification-button" aria-label="Notificaciones">🔔<span class="notification-badge">8</span></button>
+    </header>
+
+    <aside class="side-menu" id="sideMenu" aria-hidden="true">
+      <div class="side-menu-header"><strong>PAESnet</strong><button class="close-menu" id="closeMenu">×</button></div>
+      <nav class="side-menu-nav">
+        <a href="index.html">Inicio</a>
+        <a href="asistencia.html">Ensayos / Asistencia</a>
+        <a href="resultados.html">Resultados</a>
+        <a href="estudio.html">Plan de estudio</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </aside>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <main class="results-page">
+      <section class="results-hero">
+        <div>
+          <a class="back-link" href="index.html">←</a>
+          <p class="exam-label">Rendimiento PAES</p>
+          <h1>Resultados y progreso</h1>
+          <p>Resumen construido con el último resultado guardado de cada ensayo.</p>
+        </div>
+        <div class="student-select">👤 <span data-profile-name>Estudiante PAES</span></div>
+      </section>
+
+      <section class="results-type-switch" aria-label="Resultados por tipo de PAES">
+        <button class="exam-type-tab active" data-results-type="regular">
+          <span>📘</span>
+          <div><strong>PAES Regular</strong><small>Resultados del proceso regular</small></div>
+        </button>
+        <button class="exam-type-tab" data-results-type="invierno">
+          <span>❄️</span>
+          <div><strong>PAES de Invierno</strong><small>Resultados de los ensayos de invierno</small></div>
+        </button>
+      </section>
+
+      <section class="results-summary-grid">
+        <article class="result-summary-card">
+          <span>Ensayos completados</span>
+          <strong id="completedExams">0 de 6</strong>
+          <small id="completedExamsNote">El Ensayo 7 figura como ausente</small>
+        </article>
+        <article class="result-summary-card">
+          <span>Promedio general</span>
+          <strong id="averageResult">--</strong>
+          <small>Promedio de los ensayos realizados</small>
+        </article>
+        <article class="result-summary-card">
+          <span>Mejor resultado</span>
+          <strong id="bestResult">--</strong>
+          <small id="bestExamLabel">Sin datos todavía</small>
+        </article>
+        <article class="result-summary-card">
+          <span>Respuestas correctas</span>
+          <strong id="totalCorrect">0</strong>
+          <small id="totalQuestionsLabel">de 0 preguntas respondidas</small>
+        </article>
+      </section>
+
+      <section class="results-layout">
+        <article class="results-panel">
+          <div class="results-panel-head">
+            <div>
+              <h2 id="resultsEvolutionTitle">Evolución · PAES Regular</h2>
+              <p>Último intento guardado en este navegador.</p>
+            </div>
+          </div>
+          <div id="resultsExamList" class="results-exam-list"></div>
+        </article>
+
+        <article class="results-panel">
+          <div class="results-panel-head">
+            <div>
+              <h2>Rendimiento por área</h2>
+              <p>Promedio de los ensayos asociados a cada área.</p>
+            </div>
+          </div>
+          <div id="areaResults" class="area-results"></div>
+        </article>
+      </section>
+
+      <section class="results-layout secondary-results-layout">
+        <article class="results-panel">
+          <div class="results-panel-head"><div><h2>Fortalezas y oportunidades</h2><p>Lectura rápida de tu desempeño actual.</p></div></div>
+          <div id="performanceInsight" class="performance-insight"></div>
+        </article>
+        <article class="results-panel">
+          <div class="results-panel-head"><div><h2>Acciones recomendadas</h2><p>Qué puedes hacer a continuación dentro del prototipo.</p></div></div>
+          <div class="recommendation-list">
+            <a href="asistencia.html" class="recommendation-item" data-results-attendance-link><span>📝</span><div><strong>Revisar preguntas incorrectas</strong><small>Abre un ensayo completado y filtra sus errores.</small></div><b>›</b></a>
+            <a href="asistencia.html" class="recommendation-item" data-results-attendance-link><span>🔁</span><div><strong>Repetir un ensayo</strong><small>El nuevo intento reemplazará el resultado anterior.</small></div><b>›</b></a>
+            <a href="estudio.html" class="recommendation-item"><span>📚</span><div><strong>Continuar plan de estudio</strong><small>Refuerza las áreas con menor rendimiento.</small></div><b>›</b></a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a class="bottom-nav-item" href="index.html"><span>⌂</span><small>Inicio</small></a>
+      <a class="bottom-nav-item" href="asistencia.html"><span>📝</span><small>Ensayos</small></a>
+      <a class="bottom-nav-item" href="estudio.html"><span>📖</span><small>Estudio</small></a>
+      <a class="bottom-nav-item" href="calendario.html"><span>📅</span><small>Calendario</small></a>
+      <a class="bottom-nav-item active" href="resultados.html"><span>📊</span><small>Resultados</small></a>
+      <a class="bottom-nav-item" href="perfil.html"><span>👤</span><small>Perfil</small></a>
+      <a class="bottom-nav-item" href="#"><span>•••</span><small>Más</small></a>
+    </nav>
+  </div>
+  <script src="profile-common.js"></script>
+  <script src="app.js"></script>
+  <script src="resultados.js"></script>
+</body>
+</html>
