@@ -2820,6 +2820,181 @@ const winterExams = {
   }
 };
 
+
+// =============================================
+// AMPLIACIÓN DEL BANCO DE PREGUNTAS
+// Cantidades de referencia PAES Invierno 2026 / Admisión 2027:
+// Lectora 65, M1 65, Ciencias 80, M2 55, Historia 65.
+// Las preguntas añadidas son originales de PAESnet y NO reproducen ítems DEMRE.
+// =============================================
+
+const PAES_TARGET_QUESTIONS = {
+  "Competencia Lectora": 65,
+  "Matemática 1 (M1)": 65,
+  "Ciencias": 80,
+  "Matemática 2 (M2)": 55,
+  "Historia y Ciencias Sociales": 65,
+  "Ensayo Mixto": 65
+};
+
+function makeQuestion(number, axis, text, options, correctIndex, explanation) {
+  const letters = ["A", "B", "C", "D"];
+  return {
+    number,
+    axis,
+    text,
+    answers: options.map((option, index) => ({ letter: letters[index], text: String(option) })),
+    correctAnswer: letters[correctIndex],
+    explanation
+  };
+}
+
+function buildLectoraQuestion(number, seed) {
+  const templates = [
+    () => {
+      const place = ["biblioteca", "centro cultural", "museo", "parque"][(seed + 1) % 4];
+      const action = ["extendió su horario", "habilitó una sala silenciosa", "creó talleres gratuitos", "mejoró la señalética"][seed % 4];
+      const effect = ["aumentaron las visitas vespertinas", "más estudiantes permanecieron estudiando", "participaron más familias", "disminuyeron las consultas de orientación"][seed % 4];
+      const text = `Un informe local señala: “El ${place} ${action}. Durante las semanas siguientes, ${effect}. La cantidad de instalaciones no cambió”. ¿Qué relación presenta principalmente el fragmento?`;
+      return makeQuestion(number, "Interpretar", text,
+        ["Una comparación entre dos ciudades.", "Una medida y un cambio observado posteriormente.", "Una definición técnica del servicio.", "Una enumeración sin relación entre sus elementos."], 1,
+        "El texto presenta primero una medida aplicada y luego un cambio observado. Esa secuencia permite reconocer una relación entre la acción y el efecto descrito, sin afirmar necesariamente causalidad absoluta.");
+    },
+    () => {
+      const claim = ["usar transporte público reduce la congestión", "leer diariamente favorece el vocabulario", "separar residuos facilita el reciclaje", "dormir suficiente favorece la concentración"][seed % 4];
+      const text = `Una columna sostiene que “${claim}” y cita un estudio con 2.400 participantes, pero aclara que los resultados pueden variar según edad y contexto. ¿Qué función cumple esa aclaración?`;
+      return makeQuestion(number, "Evaluar", text,
+        ["Invalidar por completo el estudio.", "Reconocer los límites para generalizar sus resultados.", "Demostrar que la muestra es inexistente.", "Reemplazar la evidencia por una opinión."], 1,
+        "Reconocer condiciones y límites de una investigación permite interpretar su evidencia con mayor precisión y evita generalizaciones que el estudio no puede sostener.");
+    },
+    () => {
+      const object = ["tren", "bus", "barco", "avión"][seed % 4];
+      const text = `Lee: “Martina llegó con anticipación. Miró el tablero, guardó el teléfono y volvió a comprobar el número de su asiento. Cuando anunciaron el embarque del ${object}, tomó su bolso y se dirigió a la fila”. ¿Qué se puede inferir con mayor fundamento?`;
+      return makeQuestion(number, "Interpretar",
+        text, ["Martina estaba esperando iniciar un viaje.", "Martina trabajaba controlando pasajeros.", "El viaje había sido cancelado.", "Martina había olvidado su equipaje."], 0,
+        "Las acciones de revisar el asiento, esperar el anuncio y dirigirse a la fila son indicios coherentes con una pasajera que se prepara para iniciar un viaje.");
+    },
+    () => {
+      const values = ["lunes y miércoles", "martes y jueves", "viernes y sábado", "sábado y domingo"][seed % 4];
+      const text = `Aviso: “La atención presencial se realizará ${values}. Las consultas en línea estarán disponibles todos los días y las respuestas se enviarán dentro de 48 horas”. ¿Qué información se localiza explícitamente?`;
+      return makeQuestion(number, "Localizar", text,
+        ["Las consultas en línea funcionan solo los fines de semana.", `La atención presencial se realiza ${values}.`, "Todas las respuestas son inmediatas.", "El servicio presencial funciona todos los días."], 1,
+        "El horario de atención presencial aparece indicado de manera directa en el aviso; no es necesario inferirlo.");
+    }
+  ];
+  return templates[seed % templates.length]();
+}
+
+function buildM1Question(number, seed) {
+  const t = seed % 5;
+  if (t === 0) {
+    const price = 12000 + (seed % 6) * 1000, discount = [10,15,20,25][seed % 4];
+    const final = Math.round(price * (100-discount)/100);
+    return makeQuestion(number, "Números", `Un producto cuesta $${price.toLocaleString('es-CL')} y tiene un descuento de ${discount}%. ¿Cuál es su precio después del descuento?`,
+      [final, price-Math.round(discount*10), Math.round(price*(100+discount)/100), Math.round(price*discount/100)], 0,
+      `El descuento corresponde al ${discount}% del precio original. El precio final se obtiene multiplicando $${price.toLocaleString('es-CL')} por ${(100-discount)/100}, lo que da $${final.toLocaleString('es-CL')}.`);
+  }
+  if (t === 1) {
+    const a=2+(seed%4), b=5+(seed%5), x=3+(seed%6), c=a*x+b;
+    return makeQuestion(number, "Álgebra y funciones", `Una tarifa se modela mediante ${a}x + ${b} = ${c}, donde x representa la cantidad de unidades consumidas. ¿Qué valor de x satisface el modelo?`,
+      [x, x+1, Math.max(1,x-1), c-b], 0,
+      `Se resta ${b} en ambos lados: ${a}x = ${c-b}. Luego se divide por ${a}, obteniendo x = ${x}.`);
+  }
+  if (t === 2) {
+    const base=6+(seed%5), height=4+(seed%4), area=base*height/2;
+    return makeQuestion(number, "Geometría", `Un terreno triangular tiene base ${base} m y altura perpendicular ${height} m. ¿Cuál es su área?`,
+      [area, base*height, base+height, 2*(base+height)], 0,
+      `El área de un triángulo es base por altura dividido por 2: (${base} × ${height}) / 2 = ${area} m².`);
+  }
+  if (t === 3) {
+    const vals=[4+(seed%4),6+(seed%4),8+(seed%4),10+(seed%4)]; const mean=vals.reduce((a,b)=>a+b,0)/4;
+    return makeQuestion(number, "Probabilidad y estadística", `Cuatro mediciones fueron ${vals.join(', ')}. ¿Cuál es el promedio de estas mediciones?`,
+      [mean, mean+2, vals[3], vals[0]+vals[3]], 0,
+      `El promedio se obtiene sumando las cuatro mediciones (${vals.reduce((a,b)=>a+b,0)}) y dividiendo por 4. El resultado es ${mean}.`);
+  }
+  const total=40+(seed%5)*10, part=10+(seed%4)*5, pct=Math.round(part/total*100);
+  return makeQuestion(number, "Números", `En un grupo de ${total} estudiantes, ${part} eligieron una actividad. Aproximadamente, ¿qué porcentaje del grupo representa esa cantidad?`,
+    [pct, Math.min(100,pct+10), Math.max(0,pct-10), Math.round(total/part)], 0,
+    `Se calcula ${part}/${total} × 100, lo que corresponde aproximadamente a ${pct}%.`);
+}
+
+function buildScienceQuestion(number, seed) {
+  const templates = [
+    () => makeQuestion(number, "Biología", "En un experimento se cultivan dos grupos de plantas de la misma especie con igual agua y temperatura. Solo uno recibe luz. ¿Cuál es la variable independiente?",
+      ["La cantidad de luz recibida.", "La especie de planta.", "La temperatura mantenida constante.", "La cantidad de agua mantenida constante."], 0,
+      "La variable independiente es el factor que se modifica deliberadamente entre los grupos. En este diseño, ese factor es la presencia o ausencia de luz."),
+    () => makeQuestion(number, "Física", "Dos carros de igual masa reciben fuerzas netas distintas. Si sobre el carro A actúa una fuerza neta mayor que sobre B, ¿qué se espera respecto de sus aceleraciones?",
+      ["A tendrá mayor aceleración.", "B tendrá mayor aceleración.", "Ambos tendrán aceleración nula.", "La aceleración no depende de la fuerza."], 0,
+      "Según la segunda ley de Newton, para una misma masa la aceleración aumenta cuando aumenta la fuerza neta aplicada."),
+    () => makeQuestion(number, "Química", "Una muestra de agua pura hierve y luego el vapor se condensa nuevamente. ¿Qué tipo de cambio ocurrió?",
+      ["Cambio físico, porque la sustancia sigue siendo agua.", "Cambio químico, porque aparece una sustancia nueva.", "Reacción nuclear.", "Combustión."], 0,
+      "La evaporación y la condensación modifican el estado físico, pero no la identidad química del agua; por ello son cambios físicos."),
+    () => makeQuestion(number, "Investigación científica", "Un equipo obtiene un resultado inesperado en un experimento. ¿Qué acción fortalece más la confiabilidad de la conclusión?",
+      ["Repetir el procedimiento y registrar nuevas mediciones.", "Eliminar los datos inesperados sin justificación.", "Cambiar la hipótesis después de ver el resultado y no informarlo.", "Usar una sola medición como evidencia definitiva."], 0,
+      "La repetición y el registro sistemático permiten evaluar si el resultado es reproducible y reducen la posibilidad de atribuirlo a un error aislado."),
+    () => makeQuestion(number, "Biología", "Una población de bacterias es expuesta repetidamente a un antibiótico. Algunas bacterias poseen una variante heredable que les permite sobrevivir. ¿Qué proceso explica que esa variante aumente su frecuencia?",
+      ["Selección natural.", "Generación espontánea.", "Fotosíntesis.", "Difusión simple."], 0,
+      "Las bacterias con una característica heredable que favorece la supervivencia dejan proporcionalmente más descendencia, por lo que esa variante puede aumentar su frecuencia por selección natural.")
+  ];
+  return templates[seed % templates.length]();
+}
+
+function buildM2Question(number, seed) {
+  const t=seed%5;
+  if(t===0){
+    const x=2+(seed%4), a=2+(seed%3), b=3+(seed%4), y=a*x*x+b;
+    return makeQuestion(number,"Álgebra y funciones",`Una magnitud se modela por f(x) = ${a}x² + ${b}. ¿Cuál es el valor de f(${x})?`,[y,y-a,y+b,a*x+b],0,`Se reemplaza x por ${x}: ${a}·(${x})² + ${b} = ${a*x*x} + ${b} = ${y}.`);
+  }
+  if(t===1){
+    return makeQuestion(number,"Probabilidad y estadística","En un estudio se observa una correlación positiva entre horas de estudio y puntaje, pero no se controlan otras variables. ¿Cuál conclusión es metodológicamente adecuada?",["Existe asociación, pero no basta para afirmar causalidad.","Estudiar más causa necesariamente cualquier aumento de puntaje.","La correlación demuestra que no existen otras variables relevantes.","Los datos no permiten reconocer ninguna relación."],0,"Una correlación describe asociación entre variables. Sin un diseño que controle explicaciones alternativas, no permite concluir por sí sola una relación causal.");
+  }
+  if(t===2){
+    const r=3+(seed%4), area=Math.round(Math.PI*r*r*10)/10;
+    return makeQuestion(number,"Geometría",`Un círculo tiene radio ${r} cm. Usando π ≈ 3,14, ¿cuál es aproximadamente su área?`,[Math.round(3.14*r*r*100)/100,Math.round(2*3.14*r*100)/100,r*r,2*r],0,`El área de un círculo es πr². Con r = ${r}, se obtiene 3,14 × ${r*r} = ${Math.round(3.14*r*r*100)/100} cm².`);
+  }
+  if(t===3){
+    return makeQuestion(number,"Suficiencia de datos","Se desea determinar un número real x. (1) x² = 25. (2) x > 0. ¿Qué información permite determinar x de manera única?",["Ambas afirmaciones juntas.","Solo (1).","Solo (2).","Ninguna, incluso juntas."],0,"La afirmación (1) permite x = 5 o x = −5. La afirmación (2) selecciona el valor positivo. Juntas determinan de manera única x = 5.");
+  }
+  const initial=100+(seed%4)*20, rate=10+(seed%3)*5, final=initial*(1+rate/100);
+  return makeQuestion(number,"Números",`Una cantidad inicial de ${initial} aumenta en ${rate}%. ¿Cuál es la nueva cantidad?`,[final,initial+rate,initial-rate,initial*(rate/100)],0,`Un aumento de ${rate}% equivale a multiplicar por ${1+rate/100}. Así, ${initial} × ${1+rate/100} = ${final}.`);
+}
+
+function buildHistoryQuestion(number, seed) {
+  const templates=[
+    () => makeQuestion(number,"Formación ciudadana","Un municipio publica presupuesto, contratos y criterios de adjudicación en un portal accesible a la ciudadanía. ¿Qué principio democrático fortalece principalmente esta medida?",["Transparencia y rendición de cuentas.","Secreto administrativo.","Concentración del poder.","Eliminación del control ciudadano."],0,"El acceso público a información sobre decisiones y uso de recursos permite fiscalización social y favorece la rendición de cuentas."),
+    () => makeQuestion(number,"Historia de Chile","Durante un proceso histórico, distintos grupos sociales presentan demandas al Estado mediante prensa, organizaciones y manifestaciones. ¿Qué tipo de fuente permitiría estudiar directamente sus discursos de la época?",["Periódicos y manifiestos producidos por esos grupos.","Un resumen escolar escrito décadas después.","Una novela sin relación con el periodo.","Una predicción sobre acontecimientos futuros."],0,"Las fuentes producidas por los actores durante el periodo, como periódicos y manifiestos, permiten examinar directamente sus demandas y formas de argumentación."),
+    () => makeQuestion(number,"Historia mundial","La industrialización concentró trabajadores en ciudades y expandió la producción fabril. ¿Cuál consecuencia social se asocia históricamente a este proceso?",["Crecimiento de sectores obreros urbanos.","Desaparición inmediata de las ciudades.","Fin de toda innovación tecnológica.","Eliminación de los conflictos laborales."],0,"El desarrollo fabril atrajo población hacia centros urbanos y contribuyó al crecimiento de una clase trabajadora asalariada vinculada a la industria."),
+    () => makeQuestion(number,"Geografía y sociedad","Una región enfrenta una sequía prolongada y distintas actividades compiten por el agua disponible. ¿Qué información es más relevante para planificar una gestión sustentable?",["Disponibilidad hídrica, consumo por sector y evolución de las fuentes.","Solo el nombre de los ríos.","Únicamente la población de una comuna.","El color utilizado en los mapas."],0,"La planificación requiere relacionar la disponibilidad del recurso con sus usos y con la evolución temporal de las fuentes para tomar decisiones informadas."),
+    () => makeQuestion(number,"Formación ciudadana","En una democracia representativa, ¿por qué es relevante la separación de poderes del Estado?",["Porque distribuye funciones y establece controles entre instituciones.","Porque elimina la necesidad de leyes.","Porque entrega todas las decisiones a una sola autoridad.","Porque impide cualquier fiscalización."],0,"La separación de poderes distribuye funciones estatales y establece mecanismos de control recíproco, reduciendo la concentración de poder.")
+  ];
+  return templates[seed%templates.length]();
+}
+
+function buildQuestionForSubject(subject, number, seed) {
+  if (subject === "Competencia Lectora") return buildLectoraQuestion(number, seed);
+  if (subject === "Matemática 1 (M1)") return buildM1Question(number, seed);
+  if (subject === "Ciencias") return buildScienceQuestion(number, seed);
+  if (subject === "Matemática 2 (M2)") return buildM2Question(number, seed);
+  if (subject === "Historia y Ciencias Sociales") return buildHistoryQuestion(number, seed);
+  const builders = [buildLectoraQuestion, buildM1Question, buildScienceQuestion, buildM2Question, buildHistoryQuestion];
+  return builders[seed % builders.length](number, seed);
+}
+
+function expandExamBank(collection, variantOffset = 0) {
+  Object.values(collection).forEach((exam, examIndex) => {
+    if (!exam.questions || exam.status === "absent") return;
+    const target = PAES_TARGET_QUESTIONS[exam.subject] || 65;
+    while (exam.questions.length < target) {
+      const number = exam.questions.length + 1;
+      const seed = variantOffset + examIndex * 101 + number * 7;
+      exam.questions.push(buildQuestionForSubject(exam.subject, number, seed));
+    }
+  });
+}
+
+expandExamBank(exams, 1000);
+expandExamBank(winterExams, 5000);
+
 const params = new URLSearchParams(window.location.search);
 
 const examId = params.get("id") || "1";

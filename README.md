@@ -6,7 +6,7 @@ Aplicación web HTML/CSS/JavaScript inspirada en un portal académico y adaptada
 
 - Inicio con eventos, plan de estudio y resumen dinámico.
 - 7 ensayos programados; 6 disponibles y el Ensayo 7 marcado como ausente.
-- 10 preguntas por ensayo disponible (60 preguntas de prototipo).
+- Ensayos ampliados a la extensión de referencia PAES: 65 preguntas en Competencia Lectora, M1 e Historia; 80 en Ciencias; 55 en M2. El Ensayo Mixto contiene 65 preguntas.
 - Corrección automática y almacenamiento del último intento en `localStorage`.
 - Asistencia PAES (6 de 7 = 86%).
 - Revisión de correctas e incorrectas por ensayo.
@@ -45,6 +45,7 @@ PAESnet mantiene las preguntas internas como simulaciones de práctica y enlaza 
 - Las preguntas son originales de PAESnet y no copias de ítems oficiales DEMRE.
 - Se agregaron plantillas visuales `calendario.html` y `estudio.html` para desarrollo posterior.
 
-## Despliegue
 
-PAESnet se encuentra publicado mediante Vercel y conectado a GitHub para despliegues automáticos.
+## Banco de preguntas ampliado
+
+Las preguntas de PAESnet son simulaciones originales. La cantidad de preguntas por prueba toma como referencia la PAES de Invierno 2026 (Admisión 2027) publicada por DEMRE, sin reproducir ítems oficiales.
