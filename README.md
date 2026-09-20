@@ -44,3 +44,7 @@ PAESnet mantiene las preguntas internas como simulaciones de práctica y enlaza 
 - Banco de preguntas reescrito con situaciones, fuentes, interpretación de datos y modelamiento más cercanos al enfoque competencial de PAES.
 - Las preguntas son originales de PAESnet y no copias de ítems oficiales DEMRE.
 - Se agregaron plantillas visuales `calendario.html` y `estudio.html` para desarrollo posterior.
+
+## Despliegue
+
+PAESnet se encuentra publicado mediante Vercel y conectado a GitHub para despliegues automáticos.
