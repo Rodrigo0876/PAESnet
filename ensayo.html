@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PAESnet - Ensayo</title>
+  <title>SuperPaes - Ensayo</title>
 
   <link rel="stylesheet" href="styles.css" />
   <script src="auth.js"></script>
@@ -16,7 +16,7 @@
 
       <div class="brand">
         <div class="brand-icon">🎓</div>
-        <span>PAES<span class="brand-light">net</span></span>
+        <span>Super<span class="brand-light">Paes</span></span>
       </div>
 
       <div class="exam-status">
@@ -50,6 +50,7 @@
             Pregunta 1
           </span>
 
+          <button type="button" id="reviewToggle" class="review-toggle" aria-pressed="false">☆ Marcar para revisar</button>
           <span id="questionAxis" class="question-axis">
             Comprensión
           </span>
@@ -85,7 +86,7 @@
 
       <section class="question-map-section">
 
-        <h3>Preguntas</h3>
+        <h3>Preguntas</h3><p class="review-legend">🟨 Amarillo: marcada para revisar</p>
 
         <div
           id="questionMap"

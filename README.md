@@ -1,4 +1,4 @@
-# PAESnet — prototipo funcional
+# SuperPaes — prototipo funcional
 
 Aplicación web HTML/CSS/JavaScript inspirada en un portal académico y adaptada a preparación PAES.
 
@@ -33,23 +33,34 @@ La sección de Ensayos ahora permite alternar entre **PAES Regular** y **PAES de
 
 ## Perfil del estudiante
 - Página `perfil.html` editable con nombre, curso, establecimiento, meta académica y puntajes objetivo.
-- Los datos se guardan en `localStorage` bajo `paesnetStudentProfile`.
+- Los datos se guardan en `localStorage` bajo `superpaesStudentProfile`.
 - El nombre, curso y metas se reflejan en Inicio, Ensayos y Resultados.
 
 ## Material oficial DEMRE
-PAESnet mantiene las preguntas internas como simulaciones de práctica y enlaza a las publicaciones oficiales liberadas por DEMRE para consultar pruebas reales.
+SuperPaes mantiene las preguntas internas como simulaciones de práctica y enlaza a las publicaciones oficiales liberadas por DEMRE para consultar pruebas reales.
 
 
 ## Actualización de nivel PAES
 - Banco de preguntas reescrito con situaciones, fuentes, interpretación de datos y modelamiento más cercanos al enfoque competencial de PAES.
-- Las preguntas son originales de PAESnet y no copias de ítems oficiales DEMRE.
+- Las preguntas son originales de SuperPaes y no copias de ítems oficiales DEMRE.
 - Se agregaron plantillas visuales `calendario.html` y `estudio.html` para desarrollo posterior.
 
 
 ## Banco de preguntas ampliado
 
-Las preguntas de PAESnet son simulaciones originales. La cantidad de preguntas por prueba toma como referencia la PAES de Invierno 2026 (Admisión 2027) publicada por DEMRE, sin reproducir ítems oficiales.
+Las preguntas de SuperPaes son simulaciones originales. La cantidad de preguntas por prueba toma como referencia la PAES de Invierno 2026 (Admisión 2027) publicada por DEMRE, sin reproducir ítems oficiales.
 
 ## Inicio de sesión
 
 La portada del prototipo ahora corresponde al inicio de sesión. La sesión se mantiene localmente en el navegador y las páginas internas redirigen al login si no existe una sesión activa. La opción "¿Olvidaste tu contraseña?" completa las credenciales de demostración para facilitar la evaluación del prototipo. Este mecanismo es solo demostrativo y no sustituye autenticación segura con backend.
+
+
+## Ensayos del colegio
+Cinco PDF de Historia y Ciencias Sociales (H0126–H0526) disponibles en colegio.html. Sin corrección automática al no contar con solucionarios.
+
+
+## Ajustes finales
+- Inicio muestra eventos de ejemplo al primer uso gracias a `study-common.js`; pueden editarse o borrarse desde Calendario y no se regeneran tras borrarlos.
+- `¿Olvidaste tu contraseña?` despliega una opción de cuenta de prueba: `demo@superpaes.cl`. No es recuperación de contraseñas reales.
+- Los campos de acceso admiten el autocompletado del navegador.
+- Advertencia: las cuentas siguen siendo locales y no seguras para usuarios reales.

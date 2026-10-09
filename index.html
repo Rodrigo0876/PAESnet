@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Inicio de sesión de PAESnet." />
-  <title>Iniciar sesión | PAESnet</title>
+  <meta name="description" content="Inicio de sesión de SuperPaes." />
+  <title>Iniciar sesión | SuperPaes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body class="login-page">
   <main class="login-shell">
     <section class="login-brand-panel">
-      <div class="login-brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></div>
+      <div class="login-brand"><div class="brand-icon">🎓</div><span>Super<span class="brand-light">Paes</span></span></div>
       <div class="login-brand-copy">
         <span class="login-kicker">Tu preparación en un solo lugar</span>
         <h1>Prepárate para alcanzar tu meta PAES.</h1>
@@ -24,15 +24,15 @@
 
     <section class="login-form-panel">
       <div class="login-card">
-        <div class="login-mobile-brand"><div class="brand-icon">🎓</div><span>PAES<span class="brand-light">net</span></span></div>
+        <div class="login-mobile-brand"><div class="brand-icon">🎓</div><span>Super<span class="brand-light">Paes</span></span></div>
         <span class="login-kicker">Bienvenido</span>
-        <h2>Iniciar sesión</h2>
-        <p class="login-subtitle">Ingresa tus datos para acceder a PAESnet.</p>
-        <form id="loginForm" class="login-form">
+        <h2 id="authHeading">Iniciar sesión</h2>
+        <p class="login-subtitle">Ingresa tus datos para acceder a SuperPaes.</p>
+        <div class="auth-tabs"><button type="button" id="showLogin" class="active">Iniciar sesión</button><button type="button" id="showRegister">Crear cuenta</button></div><form id="loginForm" class="login-form"><div id="registerFields" hidden><label><span>Nombre</span><input id="regName" autocomplete="name" placeholder="Ej: Estudiante PAES"></label><label><span>Colegio o liceo</span><input id="regSchool" autocomplete="organization" placeholder="Ej: Liceo Central"></label><label><span>Curso</span><select id="regCourse"><option>1° Medio</option><option>2° Medio</option><option>3° Medio</option><option selected>4° Medio</option><option>Egresado</option></select></label></div>
           <label><span>Correo electrónico</span><input id="loginEmail" type="email" autocomplete="username" placeholder="correo@ejemplo.cl" required></label>
           <label><span>Contraseña</span><div class="password-field"><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required><button type="button" id="togglePassword">Ver</button></div></label>
-          <div class="login-help"><button type="button" id="forgotPassword">¿Olvidaste tu contraseña?</button></div>
-          <button class="login-submit" type="submit">Iniciar sesión</button>
+          <div class="login-help" id="loginHelp"><button type="button" id="forgotPassword" aria-expanded="false" aria-controls="demoAccess">¿Olvidaste tu contraseña?</button></div><div id="demoAccess" class="demo-access" hidden><p>¿Quieres explorar SuperPaes? Puedes ingresar con una cuenta de demostración.</p><button type="button" id="useDemoAccount">Usar cuenta de prueba</button></div>
+          <button class="login-submit" type="submit" id="authSubmit">Iniciar sesión</button>
           <div id="loginMessage" class="login-message" aria-live="polite"></div>
         </form>
       </div>

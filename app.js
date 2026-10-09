@@ -1,9 +1,3 @@
-const events = [
-  { type: "Evento", days: "en 12 días", title: "Ensayo PAES completo", date: "Sábado 24 de mayo", description: "Ensayo general de todas las competencias.", icon: "📋" },
-  { type: "Evento", days: "en 28 días", title: "Prueba PAES Invierno", date: "Martes 10 y miércoles 11 de junio", description: "Fechas oficiales de rendición PAES Invierno.", icon: "🗓️" },
-  { type: "Evento", days: "en 45 días", title: "Resultados PAES Invierno", date: "Miércoles 2 de julio", description: "Conoce tus resultados y próximos pasos.", icon: "📈" }
-];
-
 const studyItems = [
   { category: "Estudio", time: "09:00 - 10:30", subject: "Competencia Lectora", description: "Comprensión de textos no literarios", progress: 75, status: "En progreso", icon: "📘", bg: "#f2edff", color: "#6b35d4" },
   { category: "Estudio", time: "11:00 - 12:30", subject: "Matemática 1 (M1)", description: "Ejercicios de álgebra y funciones", progress: 66, status: "En progreso", icon: "🧮", bg: "#eefaf5", color: "#15945a" },
@@ -17,7 +11,7 @@ const services = [
   { icon: "📚", title: "Material de estudio", description: "Guías, ejercicios y contenidos por materia.", href: "estudio.html" },
   { icon: "🎯", title: "Metas", description: "Define y sigue tus metas de puntaje.", href: "resultados.html" },
   { icon: "💡", title: "Tips y consejos", description: "Estrategias y recomendaciones para la PAES.", href: "estudio.html" },
-  { icon: "✅", title: "Material oficial DEMRE", description: "Consulta pruebas y preguntas oficiales liberadas por DEMRE.", href: "https://portaldemre.demre.cl/publicaciones/2025/pruebas-oficiales-y-seleccion-preguntas-paes-p2025" }
+  { icon: "✅", title: "Material oficial DEMRE", description: "Consulta pruebas y preguntas oficiales liberadas por DEMRE.", href: "https://demre.cl/publicaciones/2027/pruebas-oficiales-paes-invierno-p2027" }
 ];
 
 const regularExams = [
@@ -79,9 +73,31 @@ function configureExamTypeTabs() {
 function renderEvents() {
   const container = document.querySelector("#eventContainer");
   if (!container) return;
-  container.innerHTML = events.map(event => `
-    <article class="event-card"><div class="event-top"><span class="pill">${event.type}</span><span>${event.days}</span></div><h3>${event.title}</h3><p><strong>${event.date}</strong></p><p>${event.description}</p><div class="event-illustration">${event.icon}</div></article>
-  `).join("");
+  // Sembrar ejemplos una sola vez; respetar los eventos editados o eliminados.
+  if (typeof ensurePaesDemoEvents === "function") ensurePaesDemoEvents();
+  if (typeof ensureSuperPaesWelcomeEvents === "function") ensureSuperPaesWelcomeEvents();
+  // Los eventos se obtienen del mismo calendario que utiliza la página Calendario.
+  let stored = [];
+  try { stored = JSON.parse(localStorage.getItem("paesnetCalendarEvents") || "[]"); } catch (_) {}
+  if (!Array.isArray(stored)) stored = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const todayKey = [today.getFullYear(), String(today.getMonth()+1).padStart(2,"0"), String(today.getDate()).padStart(2,"0")].join("-");
+  const upcoming = stored.filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date || "") && e.date >= todayKey)
+    .sort((a,b) => `${a.date} ${a.time||"23:59"}`.localeCompare(`${b.date} ${b.time||"23:59"}`)).slice(0,3);
+  const safe = value => String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const icons = {study:"📘",exam:"📋",reminder:"🔔",other:"📅"};
+  const labels = {study:"Estudio",exam:"Ensayo",reminder:"Recordatorio",other:"Evento"};
+  if (!upcoming.length) {
+    container.innerHTML = '<div class="event-empty">No hay próximos eventos. <a href="calendario.html">Agrega uno en el calendario →</a></div>';
+    return;
+  }
+  container.innerHTML = upcoming.map(e => {
+    const date = new Date(e.date + "T12:00:00");
+    const days = Math.round((date.getTime() - today.getTime()) / 86400000);
+    const when = days === 0 ? "Hoy" : days === 1 ? "Mañana" : `en ${days} días`;
+    const dateLabel = new Intl.DateTimeFormat("es-CL", {weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(date);
+    return `<a class="event-card event-link" href="calendario.html?date=${encodeURIComponent(e.date)}" aria-label="Ver ${safe(e.title)} en el calendario"><div class="event-top"><span class="pill">${safe(labels[e.type] || "Evento")}</span><span>${when}</span></div><h3>${safe(e.title)}</h3><p><strong>${safe(dateLabel)}${e.time ? " · "+safe(e.time) : ""}</strong></p><p>${safe(e.description || "Ver detalles en el calendario")}</p><div class="event-illustration">${icons[e.type] || "📅"}</div></a>`;
+  }).join("");
 }
 
 function renderStudyItems(items = studyItems) {
@@ -1102,6 +1118,7 @@ function renderHomeProgress() {
 }
 
 
+if (typeof ensurePaesDemoEvents === "function") ensurePaesDemoEvents();
 renderEvents();
 renderStudyItems();
 renderServices();

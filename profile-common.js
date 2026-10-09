@@ -1,8 +1,9 @@
 const PAESNET_PROFILE_KEY = "paesnetStudentProfile";
+function profileStorageKey(){const email=localStorage.getItem("superpaesCurrentEmail");return email?"superpaesProfile:"+email:PAESNET_PROFILE_KEY;}
 
 const PAESNET_DEFAULT_PROFILE = {
   name: "",
-  email: "cristobalcontreras@paesnet.cl",
+  email: localStorage.getItem("superpaesCurrentEmail") || "cristobalcontreras@paesnet.cl",
   course: "4° Medio",
   school: "",
   career: "",
@@ -19,8 +20,8 @@ const PAESNET_DEFAULT_PROFILE = {
 };
 
 function getPaesnetProfile() {
-  const raw = localStorage.getItem(PAESNET_PROFILE_KEY);
-  if (!raw) return { ...PAESNET_DEFAULT_PROFILE, goals: { ...PAESNET_DEFAULT_PROFILE.goals } };
+  const raw = localStorage.getItem(profileStorageKey());
+  if (!raw) return { ...PAESNET_DEFAULT_PROFILE, name:"", school:"", email:localStorage.getItem("superpaesCurrentEmail")||PAESNET_DEFAULT_PROFILE.email, goals: { ...PAESNET_DEFAULT_PROFILE.goals } };
   try {
     const saved = JSON.parse(raw);
     return {
@@ -34,7 +35,7 @@ function getPaesnetProfile() {
 }
 
 function savePaesnetProfile(profile) {
-  localStorage.setItem(PAESNET_PROFILE_KEY, JSON.stringify(profile));
+  localStorage.setItem(profileStorageKey(), JSON.stringify(profile));
   applyPaesnetProfile(profile);
 }
 

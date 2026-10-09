@@ -1,0 +1,4 @@
+const schoolCodes=['H0126','H0226','H0326','H0426','H0526'];
+const schoolKey=id=>`superpaesSchoolResult_${id}`;
+function schoolResult(id){try{return JSON.parse(localStorage.getItem(schoolKey(id))||'null')}catch{return null}}
+function renderSchoolList(el,results=false){el.innerHTML=schoolCodes.map((code,i)=>{const id=i+1,r=schoolResult(id),done=r&&r.finished;const pct=r?Math.round(Object.keys(r.answers||{}).length/65*100):0;return `<a class="school-row" href="${results?'colegio-resultados.html?id='+id:'colegio-ensayo.html?id='+id}"><span class="school-index">${id}</span><span class="school-row-main"><strong>Ensayo ${id} — ${code}</strong><small>Historia y Ciencias Sociales · 65 preguntas</small><small>${done?'Finalizado':r?'En progreso':'Pendiente'}</small></span><span class="school-status">${done?'✓ Realizado':r?'En curso':'Por realizar'}</span><span class="school-circle">${r?pct+'%':'--'}</span></a>`}).join('')}

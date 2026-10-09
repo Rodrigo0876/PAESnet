@@ -1898,3 +1898,22 @@ main {
 .profile-field input[readonly] { background: #f7f9fc; color: #667085; cursor: not-allowed; }
 @media (max-width: 900px) { .profile-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .profile-stats-grid { grid-template-columns: 1fr; } }
+
+.review-toggle{border:1px solid #e4c56e;background:#fff8dc;color:#805800;border-radius:20px;padding:9px 14px;cursor:pointer;font-weight:700}.review-toggle.marked{background:#ffe49b;border-color:#dfaa2c}.question-map-button.review-marked{background:#ffe49b!important;border-color:#d99a00!important;color:#563b00!important}.review-legend{font-size:13px;color:#7a621c;margin:4px 0 12px}.question-header{gap:10px;flex-wrap:wrap}
+
+.auth-tabs{display:flex;gap:8px;margin:14px 0}.auth-tabs button{border:1px solid #d5e0f7;background:#f5f8ff;border-radius:12px;padding:12px;flex:1;cursor:pointer;font-weight:600}.auth-tabs button.active{background:#2768ff;color:white}#registerFields label{display:block;margin-bottom:12px}#registerFields input,#registerFields select{width:100%;padding:13px;border:1px solid #d4ddec;border-radius:10px;margin-top:6px}
+
+/* Navegación y acciones de cuenta */
+.logout-button, .logout-button.secondary {background:#dc2626!important;color:#fff!important;border-color:#dc2626!important;font-weight:700;}
+.logout-button:hover {background:#b91c1c!important;border-color:#b91c1c!important;}
+.event-card.event-link {display:block;text-decoration:none;color:inherit;cursor:pointer;transition:transform .15s,box-shadow .15s;}
+.event-card.event-link:hover {transform:translateY(-2px);box-shadow:0 9px 25px rgba(30,70,150,.13);}
+.event-card.event-link:focus-visible {outline:3px solid #246bff;outline-offset:3px;}
+.event-empty {padding:25px;border:1px solid #d8e5ff;border-radius:18px;background:#f8fbff;}
+
+/* Acceso de demostración desplegable */
+.demo-access{border:1px solid #d6e3ff;background:#f2f6ff;border-radius:14px;padding:14px;margin:4px 0 14px;color:#233a64;font-size:13px;}
+.demo-access[hidden]{display:none!important;}
+.demo-access p{margin:0 0 10px;line-height:1.5;}
+.demo-access button{border:1px solid #2869ef;background:white;color:#185bd6;border-radius:9px;padding:10px 14px;font-weight:700;cursor:pointer;width:100%;}
+.demo-access button:hover{background:#e7efff;}

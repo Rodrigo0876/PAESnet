@@ -1,3 +1,4 @@
+function currentAccountProfile(){try{return JSON.parse(localStorage.getItem("superpaesAccounts")||"{}")[localStorage.getItem("superpaesCurrentEmail")]||{};}catch{return {};}}
 function clampGoal(value, fallback) {
   const number = Number(value);
   if (!Number.isFinite(number)) return fallback;
@@ -7,7 +8,7 @@ function clampGoal(value, fallback) {
 function fillProfileForm() {
   const profile = getPaesnetProfile();
   document.querySelector("#profileName").value = profile.name || "";
-  document.querySelector("#profileEmail").value = profile.email || "cristobalcontreras@paesnet.cl";
+  document.querySelector("#profileEmail").value = profile.email || localStorage.getItem("superpaesCurrentEmail") || "";
   document.querySelector("#profileCourse").value = profile.course || "";
   document.querySelector("#profileSchool").value = profile.school || "";
   document.querySelector("#profileCareer").value = profile.career || "";
@@ -78,7 +79,7 @@ if (profileForm) {
     const current = getPaesnetProfile();
     const profile = {
       name: document.querySelector("#profileName").value.trim(),
-      email: "cristobalcontreras@paesnet.cl",
+      email: current.email,
       course: document.querySelector("#profileCourse").value.trim() || "4° Medio",
       school: document.querySelector("#profileSchool").value.trim(),
       career: document.querySelector("#profileCareer").value.trim(),
@@ -100,7 +101,7 @@ if (profileForm) {
   });
 
   document.querySelector("#resetProfile").addEventListener("click", () => {
-    savePaesnetProfile({ ...PAESNET_DEFAULT_PROFILE, goals: { ...PAESNET_DEFAULT_PROFILE.goals } });
+    savePaesnetProfile({ ...PAESNET_DEFAULT_PROFILE, name: currentAccountProfile().name, email: currentAccountProfile().email, school: currentAccountProfile().school, course: currentAccountProfile().course, goals: { ...PAESNET_DEFAULT_PROFILE.goals } });
     fillProfileForm();
     renderProfileStats();
     showSavedMessage("Perfil restablecido");
@@ -111,6 +112,7 @@ const logoutButton = document.querySelector("#logoutButton");
 if (logoutButton) {
   logoutButton.addEventListener("click", () => {
     localStorage.removeItem("paesnetSession");
+    localStorage.removeItem("superpaesCurrentEmail");
     window.location.href = "index.html";
   });
 }

@@ -139,7 +139,7 @@ function renderAreaResults(completed) {
 function renderInsight(completed, average) {
   const box = document.querySelector("#performanceInsight");
   if (!completed.length) {
-    box.innerHTML = `<div class="empty-result-state"><span>📊</span><strong>Aún no hay resultados</strong><p>Rinde uno de los ensayos de esta categoría para que PAESnet analice tu desempeño.</p><a class="exam-button primary" href="${resultsAttendanceUrl()}">Ir a ensayos</a></div>`;
+    box.innerHTML = `<div class="empty-result-state"><span>📊</span><strong>Aún no hay resultados</strong><p>Rinde uno de los ensayos de esta categoría para que SuperPaes analice tu desempeño.</p><a class="exam-button primary" href="${resultsAttendanceUrl()}">Ir a ensayos</a></div>`;
     return;
   }
 

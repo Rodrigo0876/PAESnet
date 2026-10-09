@@ -9,6 +9,7 @@ let selectedDate = new URLSearchParams(window.location.search).get("date") || to
 const selectedFromUrl = parseDateKey(selectedDate);
 if (!Number.isNaN(selectedFromUrl.getTime())) viewDate = new Date(selectedFromUrl.getFullYear(), selectedFromUrl.getMonth(), 1);
 ensurePaesDemoEvents();
+ensureSuperPaesWelcomeEvents();
 let events = loadEvents();
 
 function loadEvents(){ try { return JSON.parse(localStorage.getItem(CALENDAR_STORAGE_KEY)) || []; } catch { return []; } }

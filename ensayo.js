@@ -2825,7 +2825,7 @@ const winterExams = {
 // AMPLIACIÓN DEL BANCO DE PREGUNTAS
 // Cantidades de referencia PAES Invierno 2026 / Admisión 2027:
 // Lectora 65, M1 65, Ciencias 80, M2 55, Historia 65.
-// Las preguntas añadidas son originales de PAESnet y NO reproducen ítems DEMRE.
+// Las preguntas añadidas son originales de SuperPaes y NO reproducen ítems DEMRE.
 // =============================================
 
 const PAES_TARGET_QUESTIONS = {
@@ -3026,6 +3026,18 @@ const questions = exam.questions;
 let currentQuestionIndex = 0;
 
 const userAnswers = {};
+const reviewStorageKey = `superpaesReview_${examType}_${examId}`;
+let reviewMarks = [];
+try { const saved = JSON.parse(localStorage.getItem(reviewStorageKey) || '[]'); if (Array.isArray(saved)) reviewMarks = saved.filter(n => Number.isInteger(n) && n >= 0 && n < questions.length); } catch (_) {}
+const reviewToggle = document.getElementById('reviewToggle');
+function toggleReview() {
+  const idx = reviewMarks.indexOf(currentQuestionIndex);
+  if (idx >= 0) reviewMarks.splice(idx, 1); else reviewMarks.push(currentQuestionIndex);
+  localStorage.setItem(reviewStorageKey, JSON.stringify(reviewMarks));
+  renderQuestion();
+}
+reviewToggle.addEventListener('click', toggleReview);
+
 
 
 // =============================================
@@ -3147,6 +3159,10 @@ function renderQuestion() {
       "Siguiente →";
   }
 
+  const marked = reviewMarks.includes(currentQuestionIndex);
+  reviewToggle.textContent = marked ? '★ Quitar marca' : '☆ Marcar para revisar';
+  reviewToggle.classList.toggle('marked', marked);
+  reviewToggle.setAttribute('aria-pressed', String(marked));
   renderQuestionMap();
 
   updateProgress();
@@ -3242,6 +3258,10 @@ function renderQuestionMap() {
         );
       }
 
+      if (reviewMarks.includes(index)) {
+        button.classList.add('review-marked');
+        button.title = 'Marcada para revisar';
+      }
       if (userAnswers[index]) {
 
         button.classList.add(
@@ -3315,6 +3335,7 @@ function finishExam() {
     }
   }
 
+  if (reviewMarks.length && !confirm(`Tienes ${reviewMarks.length} pregunta(s) marcadas para revisar. ¿Deseas finalizar igualmente?`)) return;
   let correctAnswers = 0;
 
   questions.forEach(
@@ -3380,6 +3401,7 @@ function finishExam() {
   );
 
 
+  localStorage.removeItem(reviewStorageKey);
   alert(
     `${exam.title} finalizado.\n\n` +
     `Correctas: ${correctAnswers}\n` +
